@@ -1,57 +1,44 @@
-<!DOCTYPE html>
-<html lang="es">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-    <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Productos</h1>
+@extends('layouts.app')
 
-        @if(session('success'))
-            <div class="alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+@section('title', 'Lista de Productos')
 
-        <a href="{{ route('productos.create') }}" class="btn btn-primary">Crear Producto</a>
+@section('content')
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">Nuestros Productos</h2>
 
-        <table class="productos-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio Neto</th>
-                    <th>Precio Venta (IVA 19%)</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($productos as $producto)
-                    <tr>
-                        <td>{{ $producto->id }}</td>
-                        <td>{{ $producto->nombre }}</td>
-                        <td>${{ number_format($producto->precio, 2, ',', '.') }}</td>
-                        <td>${{ number_format($producto->precio * 1.19, 2, ',', '.') }}</td>
-                        <td>
-                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-edit">Editar</a>
-                            <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-delete" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5">No hay productos registrados.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <div class="mb-4">
+        <a href="{{ route('productos.create') }}" class="btn btn-success btn-lg">Crear Producto</a>
     </div>
-</body>
-</html>
+
+    <div class="row">
+        @foreach($productos as $producto)
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if($producto->imagen_url)
+                        <img src="{{ $producto->imagen_url }}" class="card-img-top" alt="{{ $producto->nombre }}" style="height:200px; object-fit:cover;">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $producto->nombre }}</h5>
+                        <p class="card-text">
+                            <strong>Precio Neto:</strong> ${{ number_format($producto->precio_neto, 2, ',', '.') }}<br>
+                            <strong>Precio Venta (IVA 19%):</strong> ${{ number_format($producto->precio_venta, 2, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                        <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro quieres eliminar este producto?')">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+@endsection
