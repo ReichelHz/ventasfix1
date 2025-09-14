@@ -110,11 +110,23 @@ public function store(Request $request) {
   </table>
 </div>
 ```
-- El diseño del sistema utiliza el template Vuexy:
-  - Sidebar y navbar con estilos Vuexy.
-  - Cards, tablas y botones con clases Vuexy (`vuexy-card`, `vuexy-table`, `vuexy-btn`).
-  - Archivos CSS y JS de Vuexy incluidos en el layout principal.
-  - Visual coherente y moderna en todas las vistas.
+El diseño del sistema utiliza el template Vuexy y se han aplicado mejoras visuales:
+
+- Navbar superior única y responsive con enlaces principales.
+- Cards, tablas y botones con clases Vuexy (`vuexy-card`, `vuexy-table`, `vuexy-btn`).
+- Iconos en botones y cards usando Bootstrap Icons.
+- Badges para mostrar conteos y estados en dashboard, usuarios, clientes y productos.
+- Footer fijo con copyright y estilo Vuexy.
+- Scroll horizontal visible y aviso en tablas para usuarios móviles.
+- Visual coherente y moderna en todas las vistas principales.
+
+### Ejemplo de código aplicado:
+```html
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow vuexy-navbar">...</nav>
+<h1>Usuarios <span class="badge bg-primary">{{ count($usuarios) }}</span></h1>
+<a class="btn btn-success"><i class="bi bi-person-plus"></i> Crear Usuario</a>
+<footer class="bg-white text-center py-3 border-top mt-4 shadow-sm vuexy-footer">...</footer>
+```
 
 ## 7. Seguridad y Buenas Prácticas
 ### Código ejemplo (validación y cifrado):

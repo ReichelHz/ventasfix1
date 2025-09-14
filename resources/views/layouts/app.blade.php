@@ -37,7 +37,9 @@
     <main class="container-fluid p-4 vuexy-main">
         @yield('content')
     </main>
-
+    <footer class="bg-white text-center py-3 border-top mt-4 shadow-sm vuexy-footer">
+        <span class="text-muted">&copy; {{ date('Y') }} VentasFix. Todos los derechos reservados.</span>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

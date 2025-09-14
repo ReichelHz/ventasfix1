@@ -4,14 +4,14 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2 class="mb-4 text-primary">Nuestros Productos</h2>
+    <h2 class="mb-4 text-primary">Nuestros Productos <span class="badge bg-success" style="font-size:1rem;vertical-align:middle;">{{ count($productos) }}</span></h2>
 
     @if(session('success'))
         <div class="alert alert-success vuexy-alert">{{ session('success') }}</div>
     @endif
 
     <div class="mb-4">
-        <a href="{{ route('productos.create') }}" class="btn btn-success btn-lg vuexy-btn">Crear Producto</a>
+    <a href="{{ route('productos.create') }}" class="btn btn-success btn-lg vuexy-btn"><i class="bi bi-plus-square"></i> Crear Producto</a>
     </div>
 
     <div class="row">
