@@ -4,7 +4,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="container-xxl py-5">
+<div class="py-5">
     <h1 class="text-center" style="color:#0D6EFD; font-weight:700; font-size:2.5rem; margin-bottom:2.5rem;">Dashboard</h1>
     <div class="row justify-content-center">
         <!-- Usuarios -->

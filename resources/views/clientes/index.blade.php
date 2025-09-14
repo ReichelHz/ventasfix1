@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container-xxl py-4">
+<div class="py-4">
     <h1 class="text-center mb-4" style="color:#0D6EFD;font-weight:700;font-size:2.2rem;">Clientes</h1>
 
     <div class="d-flex justify-content-end mb-3">
@@ -21,7 +21,10 @@
 
     <div class="card shadow border-0 vuexy-card">
         <div class="card-body p-0">
-            <div class="table-responsive">
+            <div class="alert alert-info d-block d-md-none mb-2" style="font-size:0.95rem;">
+                <i class="bi bi-arrow-left-right"></i> Desliza horizontalmente para ver toda la tabla.
+            </div>
+            <div class="table-responsive" style="overflow-x:auto; scrollbar-width:thin;">
                 <table class="table table-hover table-bordered align-middle mb-0 vuexy-table">
                     <thead class="table-light">
                         <tr style="background:#e0e7ff;color:#0D6EFD;">
