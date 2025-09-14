@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * Los atributos que se pueden asignar masivamente.
@@ -18,8 +19,16 @@ class User extends Authenticatable
         'nombre',
         'apellido',
         'email',
-        'password'
+        'password',
+        'role' // admin, user, etc.
     ];
+    /**
+     * Verifica si el usuario tiene el rol indicado.
+     */
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 
     /**
      * Los atributos que deben estar ocultos en serialización.
@@ -34,6 +43,5 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
 }

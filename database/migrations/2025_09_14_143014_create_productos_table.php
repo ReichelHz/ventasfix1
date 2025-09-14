@@ -12,6 +12,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('productos', function (Blueprint $table) {
+            if (Schema::hasColumn('productos', 'precio')) {
+                $table->dropColumn('precio');
+            }
             $table->string('sku', 50)->unique()->after('id');
             $table->string('descripcion_corta', 255)->after('nombre');
             $table->text('descripcion_larga')->nullable()->after('descripcion_corta');
@@ -31,11 +34,15 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('productos', function (Blueprint $table) {
-            $table->dropColumn([
+            foreach ([
                 'sku', 'descripcion_corta', 'descripcion_larga', 'imagen_url',
                 'precio_neto', 'precio_venta', 'stock_actual', 'stock_minimo',
                 'stock_bajo', 'stock_alto'
-            ]);
+            ] as $column) {
+                if (Schema::hasColumn('productos', $column)) {
+                    $table->dropColumn($column);
+                }
+            }
         });
     }
 };

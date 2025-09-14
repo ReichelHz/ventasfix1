@@ -3,11 +3,11 @@
 @section('title', 'Usuarios')
 
 @section('content')
-<div class="container py-4">
-    <h1 class="page-title">Usuarios</h1>
+<div class="container-xxl py-4">
+    <h1 class="text-center mb-4" style="color:#0D6EFD;font-weight:700;font-size:2.2rem;">Usuarios</h1>
 
     <div class="d-flex justify-content-end mb-3">
-        <a href="{{ route('usuarios.create') }}" class="btn btn-success btn-create">
+        <a href="{{ route('usuarios.create') }}" class="btn btn-success btn-create" style="background-color:#22c55e;">
             <i class="bi bi-person-plus-fill"></i> Crear Usuario
         </a>
     </div>
@@ -16,12 +16,12 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="card shadow-sm">
-        <div class="card-body">
+    <div class="card shadow border-0 vuexy-card">
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered text-center align-middle">
-                    <thead>
-                        <tr>
+                <table class="table table-hover table-bordered align-middle mb-0 vuexy-table">
+                    <thead class="table-light">
+                        <tr style="background:#e0e7ff;color:#0D6EFD;">
                             <th>ID</th>
                             <th>RUT</th>
                             <th>Nombre</th>
@@ -38,14 +38,14 @@
                             <td>{{ $usuario->nombre }}</td>
                             <td>{{ $usuario->apellido }}</td>
                             <td>{{ $usuario->email }}</td>
-                            <td class="d-flex justify-content-center gap-2">
-                                <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary btn-sm">
+                            <td class="d-flex flex-wrap justify-content-center gap-2">
+                                <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary btn-sm" style="background-color:#0D6EFD;">
                                     <i class="bi bi-pencil-fill"></i> Editar
                                 </a>
                                 <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"
+                                    <button type="submit" class="btn btn-danger btn-sm" style="background-color:#ea5455;"
                                         onclick="return confirm('¿Seguro quieres eliminar este usuario?')">
                                         <i class="bi bi-trash-fill"></i> Eliminar
                                     </button>

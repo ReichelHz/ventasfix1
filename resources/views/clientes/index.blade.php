@@ -6,35 +6,38 @@
 @endsection
 
 @section('content')
-<div class="container mt-5">
-    <h1 class="mb-4 text-primary">Clientes</h1>
+<div class="container-xxl py-4">
+    <h1 class="text-center mb-4" style="color:#0D6EFD;font-weight:700;font-size:2.2rem;">Clientes</h1>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ route('clientes.create') }}" class="btn btn-success btn-create" style="background-color:#22c55e;">
+            <i class="bi bi-person-plus-fill"></i> Crear Cliente
+        </a>
+    </div>
 
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('clientes.create') }}" class="btn btn-primary mb-3">Crear Cliente</a>
-
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <table class="table table-striped table-hover">
-                <thead class="table-primary">
-                    <tr>
-                        <th>ID</th>
-                        <th>RUT Empresa</th>
-                        <th>Rubro</th>
-                        <th>Razón Social</th>
-                        <th>Teléfono</th>
-                        <th>Dirección</th>
-                        <th>Nombre Contacto</th>
-                        <th>Email Contacto</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($clientes as $cliente)
+    <div class="card shadow border-0 vuexy-card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle mb-0 vuexy-table">
+                    <thead class="table-light">
+                        <tr style="background:#e0e7ff;color:#0D6EFD;">
+                            <th>ID</th>
+                            <th>RUT Empresa</th>
+                            <th>Rubro</th>
+                            <th>Razón Social</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Nombre Contacto</th>
+                            <th>Email Contacto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($clientes as $cliente)
                         <tr>
                             <td>{{ $cliente->id }}</td>
                             <td>{{ $cliente->rut_empresa }}</td>
@@ -44,22 +47,28 @@
                             <td>{{ $cliente->direccion }}</td>
                             <td>{{ $cliente->nombre_contacto }}</td>
                             <td>{{ $cliente->email_contacto }}</td>
-                            <td>
-                                <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-sm btn-warning">Editar</a>
-                                <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" style="display:inline;">
+                            <td class="d-flex flex-wrap justify-content-center gap-2">
+                                <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary btn-sm" style="background-color:#0D6EFD;">
+                                    <i class="bi bi-pencil-fill"></i> Editar
+                                </a>
+                                <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return confirm('¿Eliminar este cliente?')" class="btn btn-sm btn-danger">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" style="background-color:#ea5455;"
+                                        onclick="return confirm('¿Eliminar este cliente?')">
+                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                    </button>
                                 </form>
                             </td>
                         </tr>
-                    @empty
+                        @empty
                         <tr>
                             <td colspan="9" class="text-center">No hay clientes registrados.</td>
                         </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

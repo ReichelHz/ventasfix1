@@ -1,3 +1,86 @@
+---
+# VentasFix - Sistema de Manejo de Carro de Compra
+
+## Descripción
+Sistema web desarrollado en Laravel para la gestión de usuarios, productos y clientes, con backoffice responsivo usando el template Vuexy y API protegida por autenticación.
+
+## Estructura del Proyecto
+- **app/Models**: Modelos Eloquent para Usuarios, Productos y Clientes
+- **app/Http/Controllers**: Controladores web y API
+- **resources/views**: Vistas Blade para login, dashboard, usuarios, productos y clientes
+- **routes/web.php**: Rutas web protegidas por autenticación
+- **routes/api.php**: Rutas API protegidas por token (Sanctum)
+- **public/vuexy**: Template Vuexy para el backoffice
+
+## Instalación
+1. Clona el repositorio y entra a la carpeta
+2. Instala dependencias:
+	```bash
+	composer install
+	npm install && npm run dev
+	```
+3. Copia `.env.example` a `.env` y configura tu base de datos
+4. Genera la clave de la app:
+	```bash
+	php artisan key:generate
+	```
+5. Ejecuta migraciones:
+	```bash
+	php artisan migrate
+	```
+6. (Opcional) Instala Sanctum para proteger la API:
+	```bash
+	composer require laravel/sanctum
+	php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+	php artisan migrate
+	```
+
+## Uso
+
+## Documentación de la API
+
+### Autenticación por Token (Sanctum)
+Para consumir la API, primero debes autenticarte usando el endpoint:
+
+**POST** `/api/login`
+```json
+{
+	"email": "usuario@ventasfix.cl",
+	"password": "tu_contraseña"
+}
+```
+Si las credenciales son correctas, recibirás un token:
+```json
+{
+	"token": "...",
+	"user": { ... }
+}
+```
+Usa este token en el header `Authorization: Bearer <token>` para acceder a rutas protegidas.
+
+### Endpoints principales
+- **GET /api/usuarios**: Listar usuarios (requiere token)
+- **POST /api/usuarios**: Crear usuario
+- **GET /api/productos**: Listar productos
+- **POST /api/productos**: Crear producto
+- **GET /api/clientes**: Listar clientes
+- **POST /api/clientes**: Crear cliente
+
+Todos los endpoints requieren validación y retornan errores claros en formato JSON.
+## Requerimientos
+- PHP >= 8.1
+- Laravel >= 10
+- MySQL o SQLite
+- Node.js y npm
+
+## Seguridad
+- Contraseñas cifradas con bcrypt
+- API protegida con tokens (Sanctum)
+- Validaciones exhaustivas en formularios y controladores
+
+## Créditos
+Desarrollado por el equipo VentasFix para la evaluación sumativa de Desarrollo de Software Web I.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

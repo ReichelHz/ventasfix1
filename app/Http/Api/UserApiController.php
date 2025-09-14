@@ -45,14 +45,21 @@ class UserApiController extends Controller
     {
         $usuario = User::findOrFail($id);
 
-        $request->validate([
+        $validated = $request->validate([
             'rut' => ['required', 'regex:/^\d{7,8}-[0-9kK]$/', 'unique:users,rut,' . $usuario->id],
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $usuario->id,
+            'password' => 'nullable|min:6',
         ]);
 
-        $usuario->update($request->all());
+        if (!empty($validated['password'])) {
+            $validated['password'] = bcrypt($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+
+        $usuario->update($validated);
         return response()->json($usuario);
     }
 

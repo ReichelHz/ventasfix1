@@ -24,8 +24,15 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $producto->nombre }}</h5>
                         <p class="card-text">
+                            <strong>SKU:</strong> {{ $producto->sku }}<br>
+                            <strong>Descripción corta:</strong> {{ $producto->descripcion_corta }}<br>
+                            <strong>Descripción larga:</strong> {{ $producto->descripcion_larga }}<br>
                             <strong>Precio Neto:</strong> ${{ number_format($producto->precio_neto, 2, ',', '.') }}<br>
-                            <strong>Precio Venta (IVA 19%):</strong> ${{ number_format($producto->precio_venta, 2, ',', '.') }}
+                            <strong>Precio Venta (IVA 19%):</strong> ${{ number_format($producto->precio_venta, 2, ',', '.') }}<br>
+                            <strong>Stock actual:</strong> {{ $producto->stock_actual }}<br>
+                            <strong>Stock mínimo:</strong> {{ $producto->stock_minimo }}<br>
+                            <strong>Stock bajo:</strong> {{ $producto->stock_bajo }}<br>
+                            <strong>Stock alto:</strong> {{ $producto->stock_alto }}
                         </p>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
