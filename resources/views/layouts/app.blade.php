@@ -28,7 +28,14 @@
                     <li class="nav-item"><a class="nav-link" href="/usuarios">Usuarios</a></li>
                     <li class="nav-item"><a class="nav-link" href="/productos">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="/clientes">Clientes</a></li>
-                    <li class="nav-item"><a class="nav-link text-danger" href="/logout">Salir</a></li>
+                    <li class="nav-item d-flex align-items-center">
+                        <form action="/logout" method="POST" class="d-inline m-0 p-0">
+                            @csrf
+                            <button type="submit" class="nav-link btn btn-link text-danger p-0" style="border:none;background:none;display:flex;align-items:center;">
+                                <i class="bi bi-box-arrow-right me-1"></i> Salir
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
