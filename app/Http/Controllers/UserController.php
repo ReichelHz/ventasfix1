@@ -10,7 +10,6 @@ class UserController extends Controller
     // Mostrar todos los usuarios o filtrar por ID
     public function index(Request $request)
     {
-        // Si hay un ID en la query, filtra por ese ID
         if ($request->has('id') && $request->id != '') {
             $usuarios = User::where('id', $request->id)->get();
         } else {

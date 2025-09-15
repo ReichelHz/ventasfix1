@@ -11,7 +11,6 @@
     .vuexy-card:hover { box-shadow: 0 0 0.75rem #0D6EFD33; }
     .btn:active, .btn:focus { box-shadow: 0 0 0.25rem #0D6EFD66; }
     .badge { font-size: 0.95em; }
-    /* Spinner de carga */
     .vuexy-spinner { display:none; position:fixed; top:50%; left:50%; z-index:9999; }
     .vuexy-spinner.active { display:block; }
 </style>
@@ -85,7 +84,7 @@
 
 @section('footer')
 <script>
-    // Spinner de carga ejemplo
+    
     function showSpinner() {
         document.querySelector('.vuexy-spinner').classList.add('active');
     }
