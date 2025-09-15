@@ -2,20 +2,43 @@
 
 @section('title', 'Lista de Productos')
 
+@section('head')
+<link rel="stylesheet" href="{{ asset('css/productos.css') }}">
+@endsection
+
+@section('css')
+<style>
+    .vuexy-card:hover { box-shadow: 0 0 0.75rem #0D6EFD33; }
+    .btn:active, .btn:focus { box-shadow: 0 0 0.25rem #0D6EFD66; }
+    .badge { font-size: 0.95em; }
+    /* Spinner de carga */
+    .vuexy-spinner { display:none; position:fixed; top:50%; left:50%; z-index:9999; }
+    .vuexy-spinner.active { display:block; }
+</style>
+@endsection
+
 @section('content')
 <div class="container mt-4">
-    <h2 class="mb-4 text-primary">Nuestros Productos <span class="badge bg-success" style="font-size:1rem;vertical-align:middle;">{{ count($productos) }}</span></h2>
+    <h2 class="mb-4 text-primary">
+        Nuestros Productos 
+        <span class="badge bg-success" style="font-size:1rem;vertical-align:middle;">
+            {{ count($productos) }}
+        </span>
+    </h2>
 
     @if(session('success'))
         <div class="alert alert-success vuexy-alert">{{ session('success') }}</div>
     @endif
 
     <form method="GET" action="{{ route('productos.index') }}" class="mb-3 d-flex justify-content-end gap-2">
-    <input type="text" name="sku" class="form-control" placeholder="Filtrar por SKU" style="max-width:160px;">
+        <input type="text" name="sku" class="form-control" placeholder="Filtrar por SKU" style="max-width:160px;">
         <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Buscar</button>
     </form>
+
     <div class="mb-4">
-    <a href="{{ route('productos.create') }}" class="btn btn-success btn-lg vuexy-btn"><i class="bi bi-plus-square"></i> Crear Producto</a>
+        <a href="{{ route('productos.create') }}" class="btn btn-success btn-lg vuexy-btn">
+            <i class="bi bi-plus-square"></i> Crear Producto
+        </a>
     </div>
 
     <div class="row">
@@ -56,6 +79,23 @@
                 </div>
             @endforeach
         @endif
+    </div>
+</div>
+@endsection
+
+@section('footer')
+<script>
+    // Spinner de carga ejemplo
+    function showSpinner() {
+        document.querySelector('.vuexy-spinner').classList.add('active');
+    }
+    function hideSpinner() {
+        document.querySelector('.vuexy-spinner').classList.remove('active');
+    }
+</script>
+<div class="vuexy-spinner">
+    <div class="spinner-border text-primary" style="width:3rem;height:3rem;" role="status">
+        <span class="visually-hidden">Cargando...</span>
     </div>
 </div>
 @endsection

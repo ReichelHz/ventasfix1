@@ -2,16 +2,12 @@
 <?php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
-// use Illuminate\Http\Request; // Eliminado porque ya está importado
-// use Illuminate\Support\Facades\Route; // Eliminado porque ya está importado
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\Api\ClienteApiController;
 use App\Http\Controllers\Api\ProductoApiController;
 use App\Http\Controllers\Api\UserApiController;
 
-// Login API (Sanctum)
 Route::post('/login', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
@@ -32,15 +28,6 @@ Route::post('/login', function (Request $request) {
     ]);
 });
 
-// Eliminados imports duplicados para evitar conflictos
-
-/*
-|--------------------------------------------------------------------------
-| Rutas API
-|--------------------------------------------------------------------------
-*/
-
-// Ruta de prueba
 Route::get('/ping', function () {
     return response()->json(['message' => 'pong']);
 });
