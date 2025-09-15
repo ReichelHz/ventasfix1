@@ -15,7 +15,7 @@
     @yield('css')  
 </head>
 <body>
-    <!-- Vuexy Navbar Única -->
+
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow vuexy-navbar">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-primary" href="/dashboard">VentasFix</a>

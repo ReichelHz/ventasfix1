@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Route; // Eliminado porque ya está importado
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-// use App\Http\Controllers\Api\ClienteApiController; // Eliminado porque ya está importado
-// use App\Http\Controllers\Api\ProductoApiController; // Eliminado porque ya está importado
-// use App\Http\Controllers\Api\UserApiController; // Eliminado porque ya está importado
+use App\Http\Controllers\Api\ClienteApiController;
+use App\Http\Controllers\Api\ProductoApiController;
+use App\Http\Controllers\Api\UserApiController;
 
 // Login API (Sanctum)
 Route::post('/login', function (Request $request) {

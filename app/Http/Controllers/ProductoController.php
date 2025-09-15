@@ -7,9 +7,13 @@ use App\Models\Producto;
 
 class ProductoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::all();
+        if ($request->filled('sku')) {
+            $productos = Producto::where('sku', $request->sku)->get();
+        } else {
+            $productos = Producto::all();
+        }
         return view('productos.index', compact('productos'));
     }
 

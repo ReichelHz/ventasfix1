@@ -16,6 +16,10 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <form method="GET" action="{{ route('usuarios.index') }}" class="mb-3 d-flex justify-content-end gap-2">
+        <input type="number" name="id" class="form-control" placeholder="Filtrar por ID" style="max-width:160px;">
+        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Buscar</button>
+    </form>
     <div class="card shadow border-0 vuexy-card">
         <div class="card-body p-0">
             <div class="alert alert-info d-block d-md-none mb-2" style="font-size:0.95rem;">
@@ -34,32 +38,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($usuarios as $usuario)
-                        <tr>
-                            <td>{{ $usuario->id }}</td>
-                            <td>{{ $usuario->rut }}</td>
-                            <td>{{ $usuario->nombre }}</td>
-                            <td>{{ $usuario->apellido }}</td>
-                            <td>{{ $usuario->email }}</td>
-                            <td class="d-flex flex-wrap justify-content-center gap-2">
-                                <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary btn-sm" style="background-color:#0D6EFD;">
-                                    <i class="bi bi-pencil-fill"></i> Editar
-                                </a>
-                                <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" style="background-color:#ea5455;"
-                                        onclick="return confirm('¿Seguro quieres eliminar este usuario?')">
-                                        <i class="bi bi-trash-fill"></i> Eliminar
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6">No hay usuarios registrados.</td>
-                        </tr>
-                        @endforelse
+                        @if(request('id') && $usuarios->isEmpty())
+                            <tr>
+                                <td colspan="6" class="text-center">ID no encontrado.</td>
+                            </tr>
+                        @else
+                            @forelse($usuarios as $usuario)
+                            <tr>
+                                <td>{{ $usuario->id }}</td>
+                                <td>{{ $usuario->rut }}</td>
+                                <td>{{ $usuario->nombre }}</td>
+                                <td>{{ $usuario->apellido }}</td>
+                                <td>{{ $usuario->email }}</td>
+                                <td class="d-flex flex-wrap justify-content-center gap-2">
+                                    <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary btn-sm" style="background-color:#0D6EFD;">
+                                        <i class="bi bi-pencil-fill"></i> Editar
+                                    </a>
+                                    <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" style="background-color:#ea5455;"
+                                            onclick="return confirm('¿Seguro quieres eliminar este usuario?')">
+                                            <i class="bi bi-trash-fill"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6">No hay usuarios registrados.</td>
+                            </tr>
+                            @endforelse
+                        @endif
                     </tbody>
                 </table>
             </div>

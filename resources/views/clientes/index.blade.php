@@ -19,6 +19,10 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <form method="GET" action="{{ route('clientes.index') }}" class="mb-3 d-flex justify-content-end gap-2">
+        <input type="number" name="id" class="form-control" placeholder="Filtrar por ID" style="max-width:160px;">
+        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Buscar</button>
+    </form>
     <div class="card shadow border-0 vuexy-card" style="transition:box-shadow 0.3s;">
         <div class="card-body p-0" style="background:linear-gradient(90deg,#f8fafc 60%,#e0e7ff 100%);">
             <div class="alert alert-info d-block d-md-none mb-2" style="font-size:0.95rem;">
@@ -39,31 +43,6 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @forelse($clientes as $cliente)
-                        <tr style="transition:background 0.2s;">
-                            <td>{{ $cliente->id }}</td>
-                            <td>{{ $cliente->rut_empresa }}</td>
-                            <td>{{ $cliente->rubro }}</td>
-                            <td>{{ $cliente->razon_social }}</td>
-                            <td>{{ $cliente->telefono }}</td>
-                            <td>{{ $cliente->direccion }}</td>
-                            <td>{{ $cliente->nombre_contacto }}</td>
-                            <td>{{ $cliente->email_contacto }}</td>
-                            <td class="d-flex flex-wrap justify-content-center gap-2">
-                                <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary btn-sm" style="background-color:#0D6EFD;transition:box-shadow 0.2s;">
-                                    <i class="bi bi-pencil"></i> Editar
-                                </a>
-                                <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" style="background-color:#ea5455;transition:box-shadow 0.2s;"
-                                        onclick="return confirm('¿Eliminar este cliente?')">
-                                        <i class="bi bi-trash"></i> Eliminar
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
 @section('css')
 <style>
     .vuexy-card:hover { box-shadow: 0 0 0.75rem #0D6EFD33; }
@@ -90,11 +69,42 @@ function hideSpinner() {
     </div>
 </div>
 @endsection
-                        @empty
-                        <tr>
-                            <td colspan="9" class="text-center">No hay clientes registrados.</td>
-                        </tr>
-                        @endforelse
+                    <tbody>
+                        @if(request('id') && $clientes->isEmpty())
+                            <tr>
+                                <td colspan="9" class="text-center">ID no encontrado.</td>
+                            </tr>
+                        @else
+                            @forelse($clientes as $cliente)
+                            <tr style="transition:background 0.2s;">
+                                <td>{{ $cliente->id }}</td>
+                                <td>{{ $cliente->rut_empresa }}</td>
+                                <td>{{ $cliente->rubro }}</td>
+                                <td>{{ $cliente->razon_social }}</td>
+                                <td>{{ $cliente->telefono }}</td>
+                                <td>{{ $cliente->direccion }}</td>
+                                <td>{{ $cliente->nombre_contacto }}</td>
+                                <td>{{ $cliente->email_contacto }}</td>
+                                <td class="d-flex flex-wrap justify-content-center gap-2">
+                                    <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-primary btn-sm" style="background-color:#0D6EFD;transition:box-shadow 0.2s;">
+                                        <i class="bi bi-pencil"></i> Editar
+                                    </a>
+                                    <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" style="background-color:#ea5455;transition:box-shadow 0.2s;"
+                                            onclick="return confirm('¿Eliminar este cliente?')">
+                                            <i class="bi bi-trash"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="9" class="text-center">No hay clientes registrados.</td>
+                            </tr>
+                            @endforelse
+                        @endif
                     </tbody>
                 </table>
             </div>
