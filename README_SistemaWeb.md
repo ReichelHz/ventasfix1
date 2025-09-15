@@ -125,6 +125,13 @@ El diseño del sistema utiliza el template Vuexy y se han aplicado mejoras visua
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow vuexy-navbar">...</nav>
 <h1>Usuarios <span class="badge bg-primary">{{ count($usuarios) }}</span></h1>
 <a class="btn btn-success"><i class="bi bi-person-plus"></i> Crear Usuario</a>
+<!-- Logout seguro -->
+<form action="/logout" method="POST" class="d-inline m-0 p-0">
+  @csrf
+  <button type="submit" class="nav-link btn btn-link text-danger p-0" style="border:none;background:none;display:flex;align-items:center;">
+    <i class="bi bi-box-arrow-right me-1"></i> Salir
+  </button>
+</form>
 <footer class="bg-white text-center py-3 border-top mt-4 shadow-sm vuexy-footer">...</footer>
 ```
 
