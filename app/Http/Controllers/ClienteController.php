@@ -7,9 +7,13 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::all();
+        if ($request->filled('id')) {
+            $clientes = Cliente::where('id', $request->id)->get();
+        } else {
+            $clientes = Cliente::all();
+        }
         return view('clientes.index', compact('clientes'));
     }
 
