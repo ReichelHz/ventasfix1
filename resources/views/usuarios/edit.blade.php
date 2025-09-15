@@ -81,4 +81,19 @@
                     </div>
 
                     <div class="mb-3 position-relative">
-                        <i class="bi bi-envelope form-icon">
+                        <i class="bi bi-envelope form-icon"></i>
+                        <input type="email" name="email" class="form-control form-input" value="{{ old('email', $usuario->email) }}" required>
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="bi bi-key"></i></span>
+                            <input type="password" name="password" class="form-control border-start-0" placeholder="Nueva contraseña (opcional)">
+                        </div>
+                        <small class="text-muted ms-1">Dejar en blanco para mantener la contraseña actual.</small>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ route('usuarios.index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Guardar Cambios</button>
+                    </div>
